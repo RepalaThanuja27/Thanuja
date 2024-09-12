@@ -1,0 +1,102 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Temperature Converter</title>
+                        <link rel="stylesheet" href="styles.css">
+                    </head>
+                    <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #0af788;
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                    }
+                    
+                    .container {
+                        background-color: rgb(74, 203, 247);
+                        padding: 40px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        text-align: center;
+                        width: 350px;
+                    }
+                    
+                    h1 {
+                        color: #333;
+                        margin-bottom: 30px;
+                    }
+                    
+                    .converter {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    
+                    .converter label, .converter select, .converter input {
+                        margin-bottom: 15px;
+                    }
+                    
+                    input, select, button {
+                        padding: 10px;
+                        font-size: 16px;
+                        width: 100%;
+                        border-radius: 4px;
+                        border: 1px solid #ccc;
+                        margin-bottom: 15px;
+                    }
+                    
+                    button {
+                        background-color: #121212;
+                        color: rgb(246, 237, 242);
+                        cursor: pointer;
+                        border: none;
+                        margin-bottom: 20px;
+                    }
+                    
+                    button:hover {
+                        background-color: #fc6829;
+                    }
+                    
+                    #result {
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: #ecebed;
+                    }
+                    </style>
+                    
+                    <body>
+                        <div class="container">
+                            <h1>Temperature Converter</h1>
+                    
+                            <div class="converter">
+                                <label for="temp-input">Enter Temperature:</label>
+                                <input type="number" id="temp-input" placeholder="Enter value">
+                    
+                                <label for="from-unit">From:</label>
+                                <select id="from-unit">
+                                    <option value="celsius">Celsius</option>
+                                    <option value="fahrenheit">Fahrenheit</option>
+                                    <option value="kelvin">Kelvin</option>
+                                </select>
+                    
+                                <label for="to-unit">To:</label>
+                                <select id="to-unit">
+                                    <option value="celsius">Celsius</option>
+                                    <option value="fahrenheit">Fahrenheit</option>
+                                    <option value="kelvin">Kelvin</option>
+                                </select>
+                    
+                                <button onclick="convertTemperature()">Convert</button>
+                                <p id="result"></p>
+                            </div>
+                        </div>
+                    
+                        <script src="temp.js"></script>
+                    </body>
+                    </html>
+                    

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Portfolio Management System</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007BFF;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar .user-info {
+            font-size: 18px;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            display: flex;
+            padding: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 20%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .sidebar ul li a:hover {
+            color: #007BFF;
+        }
+
+        /* Main Content */
+        .main-content {
+            width: 80%;
+            padding: 20px;
+        }
+
+        .main-content h2 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #333;
+        }
+
+        .portfolio-stats {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .portfolio-card {
+            background-color: #fff;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .portfolio-card h3 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #007BFF;
+        }
+
+        .portfolio-card p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .transactions {
+            margin-top: 40px;
+        }
+
+        .transactions h3 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .transactions table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .transactions table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        .transactions th, .transactions td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        .transactions th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .transactions tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Portfolio Management System</h1>
+        <div class="user-info">
+            Welcome, John Doe
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">My Portfolio</a></li>
+                <li><a href="#">Transactions</a></li>
+                <li><a href="#">Account Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2>Dashboard</h2>
+            
+            <!-- Portfolio Stats -->
+            <div class="portfolio-stats">
+                <div class="portfolio-card">
+                    <h3>Total Value</h3>
+                    <p>$100,000</p>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Annual Return</h3>
+                    <p>8%</p>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Assets</h3>
+                    <p>Stocks, Bonds, Real Estate</p>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="transactions">
+                <h3>Recent Transactions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Asset</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-09-01</td>
+                            <td>Buy</td>
+                            <td>$10,000</td>
+                            <td>Stock</td>
+                        </tr>
+                        <tr>
+                            <td>2024-08-25</td>
+                            <td>Sell</td>
+                            <td>$5,000</td>
+                            <td>Bond</td>
+                        </tr>
+                        <tr>
+                            <td>2024-08-15</td>
+                            <td>Buy</td>
+                            <td>$8,000</td>
+                            <td>Real Estate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

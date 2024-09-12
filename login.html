@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Management System - Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 800px;
+            height: 450px;
+        }
+
+        /* Logo Section */
+        .login-logo {
+            background-color: #007BFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            width: 40%;
+        }
+
+        .login-logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        /* Form Section */
+        .login-form {
+            padding: 40px;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .login-form .role-selection {
+            margin-bottom: 20px;
+        }
+
+        .login-form label {
+            margin-right: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .login-form p {
+            margin-top: 10px;
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="login-logo">
+            <img src="bird2.webp" alt="Portfolio Logo">
+        </div>
+
+        <!-- Login Form Section -->
+        <div class="login-form">
+            <h2>Login to Your Portfolio</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            
+            <!-- Role Selection -->
+            <div class="role-selection">
+                <label>
+                    <input type="radio" name="role" value="user" checked> User
+                </label>
+                <label>
+                    <input type="radio" name="role" value="admin"> Admin
+                </label>
+            </div>
+
+            <button onclick="login()">Login</button>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <script>
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.querySelector('input[name="role"]:checked').value;
+    
+            // Fetch the login data from data.json
+            const response = await fetch('data.json');
+            const data = await response.json();
+    
+            // Validate login based on role
+            let isValidLogin = false;
+    
+            if (role === 'admin') {
+                isValidLogin = data.admins.some(admin => admin.username === username && admin.password === password);
+                if (isValidLogin) {
+                    // Redirect to admin dashboard
+                    window.location.href = 'admin.html';
+                }
+            } else if (role === 'user') {
+                isValidLogin = data.users.some(user => user.username === username && user.password === password);
+                if (isValidLogin) {
+                    // Redirect to user dashboard
+                    window.location.href = 'user.html';
+                }
+            }
+    
+            if (!isValidLogin) {
+                document.getElementById('message').textContent = "Invalid username, password, or role!";
+                document.getElementById('message').style.color = "red";
+            }
+        }
+    </script>
+    
+
+</body>
+</html>
