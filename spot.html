@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify-like Music Player</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #25ef7d;
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .player-container {
+            background-color: #f10b5b;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .album-cover {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .song-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .artist-name {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .play-btn, .pause-btn {
+            background-color: #fff;
+            color: #1db954;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            outline: none;
+        }
+
+        .progress-bar {
+            margin-top: 20px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .playlist {
+            margin-top: 20px;
+        }
+
+        .playlist-item {
+            cursor: pointer;
+            margin: 10px 0;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #121212;
+            transition: background-color 0.3s;
+        }
+
+        .playlist-item:hover {
+            background-color: #1db954;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <img class="album-cover" src="hema.jpg" alt="Hemachandra">
+        <div class="song-title" id="songTitle">Oosupodhu</div>
+        <div class="artist-name" id="artistName">Hemachandra</div>
+        
+        <div class="controls">
+            <button class="play-btn" id="playBtn">▶️</button>
+            <button class="pause-btn" id="pauseBtn" style="display: none;">⏸️</button>
+        </div>
+
+        <div class="progress-bar">
+            <input type="range" id="progress" value="0" min="0" max="100">
+        </div>
+
+        <div class="playlist">
+            <div class="playlist-item" data-song="spotify.mp3" data-title="Oosupodhu" data-artist="Hemachandra">Oosupodhu</div>
+            <div class="playlist-item" data-song="piliche.mp3" data-title="Piliche Pedavula Paina" data-artist="Hemachandra">Piliche Pedavula Paina</div>
+            <div class="playlist-item" data-song="aale baale.mp3" data-title="aale baale" data-artist="Hemachandra">aale baale</div>
+        </div>
+    </div>
+
+    <script>
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const progressBar = document.getElementById('progress');
+        const songTitle = document.getElementById('songTitle');
+        const artistName = document.getElementById('artistName');
+        const playlistItems = document.querySelectorAll('.playlist-item');
+
+        // Initialize audio with the first song
+        let audio = new Audio('spotify.mp3');
+
+        // Play Button functionality
+        playBtn.addEventListener('click', () => {
+            audio.play();
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline';
+        });
+
+        // Pause Button functionality
+        pauseBtn.addEventListener('click', () => {
+            audio.pause();
+            pauseBtn.style.display = 'none';
+            playBtn.style.display = 'inline';
+        });
+
+        // Update progress bar as the song plays
+        audio.addEventListener('timeupdate', () => {
+            const progressValue = (audio.currentTime / audio.duration) * 100;
+            progressBar.value = progressValue;
+        });
+
+        // Jump to a different part of the song when the progress bar is changed
+        progressBar.addEventListener('input', (e) => {
+            const seekTime = (e.target.value / 100) * audio.duration;
+            audio.currentTime = seekTime;
+        });
+
+        // Update the audio source when a playlist item is clicked
+        playlistItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Pause the current song and reset the progress
+                audio.pause();
+                progressBar.value = 0;
+
+                // Update song details
+                const newSong = this.getAttribute('data-song');
+                const newTitle = this.getAttribute('data-title');
+                const newArtist = this.getAttribute('data-artist');
+
+                songTitle.textContent = newTitle;
+                artistName.textContent = newArtist;
+
+                // Create a new audio object with the selected song
+                audio = new Audio(newSong);
+
+                // Auto play the new song
+                audio.play();
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'inline';
+
+                // Update progress bar as the new song plays
+                audio.addEventListener('timeupdate', () => {
+                    const progressValue = (audio.currentTime / audio.duration) * 100;
+                    progressBar.value = progressValue;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
