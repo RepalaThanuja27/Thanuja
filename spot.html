@@ -119,43 +119,43 @@
         const artistName = document.getElementById('artistName');
         const playlistItems = document.querySelectorAll('.playlist-item');
 
-        // Initialize audio with the first song
+        
         let audio = new Audio('spotify.mp3');
 
-        // Play Button functionality
+        
         playBtn.addEventListener('click', () => {
             audio.play();
             playBtn.style.display = 'none';
             pauseBtn.style.display = 'inline';
         });
 
-        // Pause Button functionality
+        
         pauseBtn.addEventListener('click', () => {
             audio.pause();
             pauseBtn.style.display = 'none';
             playBtn.style.display = 'inline';
         });
 
-        // Update progress bar as the song plays
+        
         audio.addEventListener('timeupdate', () => {
             const progressValue = (audio.currentTime / audio.duration) * 100;
             progressBar.value = progressValue;
         });
 
-        // Jump to a different part of the song when the progress bar is changed
+        
         progressBar.addEventListener('input', (e) => {
             const seekTime = (e.target.value / 100) * audio.duration;
             audio.currentTime = seekTime;
         });
 
-        // Update the audio source when a playlist item is clicked
+        
         playlistItems.forEach(item => {
             item.addEventListener('click', function() {
-                // Pause the current song and reset the progress
+                
                 audio.pause();
                 progressBar.value = 0;
 
-                // Update song details
+                
                 const newSong = this.getAttribute('data-song');
                 const newTitle = this.getAttribute('data-title');
                 const newArtist = this.getAttribute('data-artist');
@@ -163,15 +163,15 @@
                 songTitle.textContent = newTitle;
                 artistName.textContent = newArtist;
 
-                // Create a new audio object with the selected song
+                
                 audio = new Audio(newSong);
 
-                // Auto play the new song
+                
                 audio.play();
                 playBtn.style.display = 'none';
                 pauseBtn.style.display = 'inline';
 
-                // Update progress bar as the new song plays
+            
                 audio.addEventListener('timeupdate', () => {
                     const progressValue = (audio.currentTime / audio.duration) * 100;
                     progressBar.value = progressValue;
